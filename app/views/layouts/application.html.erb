@@ -32,7 +32,7 @@
 					<div id="sessionTime" class="col-sm-6 block-center text-center time">
 						<b>Break Time</b><p id="computerScore2">5</p> 
 						<div class="block-center text-center" role="group" aria-label="Basic example">
-							<button class="btn btn-secondary" value="plus2" onclick="rps2(1)">plus</button> 
+							<button class="btn btn-secondary" value="plus1" onclick="rps2(1)">plus</button> 
 							<button class="btn btn-secondary" value="minus2" onclick="rps2(2)">minus</button> 
 						</div>
 					</div>	
@@ -62,7 +62,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script> 
-	var overall_time = 
+	var overall_time = 25;
     function rps1(x) {
 		var computerScore = document.getElementById('computerScore1');
     	var number = computerScore.innerHTML;
@@ -77,7 +77,7 @@
 		}
     	
 }
-	var overall_time = 25;
+	var overall_time = 5;
     function rps2(x) {
 		var computerScore = document.getElementById('computerScore2');
     	var number = computerScore.innerHTML;
