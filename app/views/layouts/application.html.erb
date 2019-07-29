@@ -18,37 +18,41 @@
     <div id="container" class="container-fluid justify-content-center">
 		<div id="pomodoro" class="container">
 			<h1 class="text-center">
-				<span id="title">Pomodoro Clock</span>
+				<b id="title">Pomodoro Clock</b>
 			<h1>
+							<Br>
+
 			<div id="setTimes" class="container">
 				<div class="row" id="header">
 					<div id="sessionTime" class="col-sm-6 block-center text-center time">
 						<b>Session Time</b><p id="computerScore1">25</p> 
 						<div class="block-center text-center" role="group" aria-label="Basic example">
-							<button class="btn btn-secondary" value="plus1" onclick="rps1(1)">plus</button> 
-							<button class="btn btn-secondary" value="plus2" onclick="rps1(2)">minus</button> 
+							<button class="btn btn-dark btn-group-toggle" value="plus1" onclick="rps1(1)">+</button> 
+							<button class="btn btn-dark btn-group-toggle" value="plus2" onclick="rps1(2)">-</button> 
 						</div>
 					</div>	
 					<div id="sessionTime" class="col-sm-6 block-center text-center time">
 						<b>Break Time</b><p id="computerScore2">5</p> 
 						<div class="block-center text-center" role="group" aria-label="Basic example">
-							<button class="btn btn-secondary" value="plus1" onclick="rps2(1)">plus</button> 
-							<button class="btn btn-secondary" value="minus2" onclick="rps2(2)">minus</button> 
+							<button class="btn btn-dark btn-group-toggle" value="plus1" onclick="rps2(1)">+</button> 
+							<button class="btn btn-dark btn-group-toggle" value="minus2" onclick="rps2(2)">-</button> 
 						</div>
 					</div>	
 				</div>
-			</div>
-			<div id="pomodoro" class="playPomodoro">
+			<div id="pomodoro" class="playPomodoro block-center text-center">
 				<div class="row">
 						
-					<div class="row">
-
+					<div class="row col-sm-12 block-center text-center">
+                        <button class="btn btn-dark btn-group-toggle" id="setterstarter" value="setter" onclick="startCountdown()">start</button>	
+						<button class="btn btn-dark btn-group-toggle" onclick="resetClock()">reset</button> 
+						<!-- <button class="btn btn-dark btn-group-toggle" onclick="resetClock()">pause</button> 	
+							 -->
 					</div>
-					<div class="row">
-
+					<div class="row col-sm-12">
+                        <b class="block-center text-center">Overall Time</b>
 					</div>
-					<div class="row">
-
+					<div class="row col-sm-12 block-center text-center">
+						<p id="overallTimeLeft" class="block-center" >25:00</p> 
 					</div>
 
 				</div>
@@ -62,14 +66,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script> 
-	var overall_time = 25;
+	
     function rps1(x) {
 		var computerScore = document.getElementById('computerScore1');
     	var number = computerScore.innerHTML;
 		if (x==1) {
 
     		number++;
-    		computerScore.innerHTML = number;
+            computerScore.innerHTML = number;
+            var timeDisplay = parseInt(document.getElementById("overallTimeLeft").innerHTML) + 1;
+            
 		} else {
 	
     		number--;
@@ -77,7 +83,7 @@
 		}
     	
 }
-	var overall_time = 5;
+
     function rps2(x) {
 		var computerScore = document.getElementById('computerScore2');
     	var number = computerScore.innerHTML;
@@ -91,6 +97,60 @@
     		computerScore.innerHTML = number;
 		}
     	
+}
+
+function resetClock(){
+
+document.getElementById("computerScore1").innerHTML = "25";
+document.getElementById("computerScore2").innerHTML = "5";
+document.getElementById("overallTimeLeft").innerHTML = "25:00";
+clearInterval(intervalHandle);
+
+}
+
+var secondsRemaining;
+var intervalHandle;
+
+function tick() {
+	var timeDisplay = document.getElementById("overallTimeLeft");
+	
+	var min = Math.floor(secondsRemaining / 60);
+	var sec = secondsRemaining - (min * 60);
+	if (sec < 10) {
+	sec = "0" + sec;
+	}
+	var message = min.toString() + ":" + sec;
+	timeDisplay.innerHTML = message;
+	if (secondsRemaining === 0){
+    alert("all done now");
+    var breaktime = parseInt(document.getElementById("computerScore2").innerHTML);
+    alert(breaktime)
+
+
+}
+	secondsRemaining--;
+
+	
+}
+
+
+
+function startCountdown() {
+    
+    var minutes = parseInt(document.getElementById("computerScore1").innerHTML);
+
+    if (isNaN(minutes)){
+		alert("Please enter a number");
+		return; // stops function if true
+	}
+
+    secondsRemaining = minutes * 60;
+    
+    intervalHandle = setInterval(tick, 1000);
+
+    
+
+
 }
     </script>
   </body>
